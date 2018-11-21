@@ -1,0 +1,116 @@
+<!--
+  Copyright 2018, Bart Butenaers
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<script type="text/x-red" data-template-name="math">
+    <div class="form-row">
+        <label for="node-input-operation"><i class="fa fa-calculator"></i> Operation</label>
+        <select id="node-input-operation">
+            <option value=""></option>
+            <option value="avg">Average</option>
+            <option value="max">Maximum</option>
+            <option value="min">Minimum</option>            
+            <option value="inc">Increment</option>
+            <option value="dec">Decrement</option>
+            <option value="trunc">Integer part</option>
+            <option value="ceil">Round upwards</option>
+            <option value="floor">Round downwards</option>
+            <option value="round">Nearest integer</option>
+            <option value="sum">Sum</option>
+            <option value="sub">Subtract</option>
+            <option value="mult">Multiply</option>
+            <option value="div">Divide</option>
+            <option value="mod">Modulus (remainder)</option>
+            <option value="abs">Absolute value</option> 
+            <option value="random">Random</option>
+            <option value="pow">X to the power of y)</option>
+            <option value="exp">E to power of x</option>
+            <option value="cbrt">Cubic root</option>
+            <option value="log">Natural logarithm (base E)</option>
+            <option value="acos">Arccosine</option>
+            <option value="acosh">Hyperbolic arccosine</option>
+            <option value="asin">Arcsine</option>
+            <option value="asinh">Hyperbolic arcsine</option>
+            <option value="atan">Arctangent</option>
+            <option value="atanh">Hyperbolic arctangent</option>
+            <option value="cos">Cosine</option>
+            <option value="cosh">Hyperbolic cosine</option>
+            <option value="sin">Sine</option>
+            <option value="sinh">Hyperbolic sine</option>
+            <option value="sqrt">Square root</option>
+            <option value="tan">Tangent</option>
+            <option value="tanh">Hyperbolic tangent</option>
+        </select>
+    </div>
+    <br>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('math', {
+        category: 'function',
+        color:    '#fdd0a2',
+        defaults: {
+            name: {value: ""},
+            operation: {value: ""}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "calculator.png",
+        label: function() {
+            return this.name || "Math";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-help-name="math">
+    <p>A Node Red node to perform basic mathematical operations.</p>
+    <p>The <code>msg.payload</code> of the input message should contain the number(s), on which the selected operation will be executed.</p>
+    <p><ul>
+        <li>Average: average of all the numbers in the array</li>
+        <li>Maximum: get the number with the highest value from an array of numbers</li>
+        <li>Minimum: get the number with the lowest value from an array of numbers</li>
+        <li>Increment: add 1 to the number</li>
+        <li>Decrement: subtract 1 from the number</li>
+        <li>Integer part: truncate (trunc) the number to the integer part</li>
+        <li>Round upwards: round the number upwards (ceil) to the nearest integer</li>
+        <li>Round downwards: round the number downwards (floor) to the nearest integer</li>
+        <li>Nearest integer: rounds the number to the nearest integer</li>
+        <li>Sum: sum of the all the numbers in the array</li>
+        <li>Subtract: subtraction of the all the numbers in the array</li>
+        <li>Multiply: multiply all the numbers in the array</li>
+        <li>Divide: division of all the numbers in the array</li>
+        <li>Modulus: get the remainder of the division of the two numbers in the array</li>
+        <li>Absolute value: absolute value (abs) of the number</li>
+        <li>Random: a random number between 0 and 1</li>
+        <li>X to the power of y: x<sup>y</sup> (from an array of two numbers [x, y])</li>
+        <li>E to the power of x: value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183)</li>
+        <li>Cubic root: cubic root (x<sup>3</sup>) of the number</li>
+        <li>Natural logarithm (base E): natural logarithm (log) of the number</li>
+        <li>Arccosine: arccosine (acos) value of the number</li>
+        <li>Hyperbolic arccosine: hyperbolic arccosine (acosh) of the number</li>
+        <li>Arcsine: arcsine (asin) of the number in radians</li>
+        <li>Hyperbolic arcsine: hyperbolic arcsine (asinh) of the number</li>
+        <li>Arctangent: arctangent (atan) of the number, as a numeric value between -PI/2 and PI/2 radians</li>
+        <li>Hyperbolic arctangent: hyperbolic arctangent (atanh) of the number</li>
+        <li>Cosine: cosine (cos) of the number in radians</li>
+        <li>Hyperbolic cosine: hyperbolic cosine of the number</li>
+        <li>Sine: sine of the number in radians</li>
+        <li>Hyperbolic sine: hyperbolic sine (sinh) of the number</li>
+        <li>Square root: square root of the number</li>
+        <li>Tangent: tangent (tan) of an angle</li>
+        <li>Hyperbolic tangent: hyperbolic tangent (tanh) of the number</li>
+    </ul></p>
+    <p>When only a single number is needed for an operation, that number can be specified in the <code>msg.payload</code>.  However it is also possible to put (for such operations) an array of numbers in the <code>msg.payload</code>, in which case the same operation will be executed on all numbers in the array.  The result will also be an array then.</p>
+</script>
