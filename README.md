@@ -7,6 +7,8 @@ Run the following npm command in your Node-RED user directory (typically ~/.node
 npm install node-red-contrib-math
 ```
 
+For more advanced mathematical operations, please have a look at the [node-red-contrib-statistics](https://github.com/DeanCording/node-red-contrib-statistics) node.
+
 ## Usage
 Three steps are involved to execute a mathematical calculation via this node:
 1. An input data is send to this node with a number or an array of numbers in the ```msg.payload```.  How many numbers should be available in the input message, depends on the *operation* type:
