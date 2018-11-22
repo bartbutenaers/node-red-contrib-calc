@@ -12,6 +12,16 @@
 -->
 <script type="text/x-red" data-template-name="math">
     <div class="form-row">
+        <label for="node-input-typed-inputMsgField"><i class="fa fa-list"></i> Input field</label>
+        <input id="node-input-typed-inputMsgField" type="text" style="width: 70%">
+        <input id="node-input-inputMsgField" type="hidden">
+    </div>
+    <div class="form-row">
+        <label for="node-input-typed-outputMsgField"><i class="fa fa-list"></i> Output field</label>
+        <input id="node-input-typed-outputMsgField" type="text" style="width: 70%">
+        <input id="node-input-outputMsgField" type="hidden">
+    </div>
+    <div class="form-row">
         <label for="node-input-operation"><i class="fa fa-calculator"></i> Operation</label>
         <select id="node-input-operation">
             <option value=""></option>
@@ -24,13 +34,14 @@
             <option value="ceil">Round upwards</option>
             <option value="floor">Round downwards</option>
             <option value="round">Nearest integer</option>
+            <option value="rdec">Round decimal places</option>
             <option value="sum">Sum</option>
             <option value="sub">Subtract</option>
             <option value="mult">Multiply</option>
             <option value="div">Divide</option>
             <option value="mod">Modulus (remainder)</option>
             <option value="abs">Absolute value</option> 
-            <option value="random">Random</option>
+            <option value="rand">Random</option>
             <option value="pow">X to the power of y)</option>
             <option value="exp">E to power of x</option>
             <option value="cbrt">Cubic root</option>
@@ -63,54 +74,87 @@
         color:    '#fdd0a2',
         defaults: {
             name: {value: ""},
+            inputMsgField: {value:"payload", required:true},
+            outputMsgField: {value:"payload", required:true},
             operation: {value: ""}
         },
         inputs: 1,
         outputs: 1,
         icon: "calculator.png",
         label: function() {
-            return this.name || "Math";
+            // Get the text of the current operation stored in this node
+            var operationText = $("#node-input-operation option[value='" + this.operation + "']").text();
+            return this.name || operationText || "Mathematics";
+        },
+        oneditprepare: function() { 
+            // Show the inputMsgField value in a typedinput element (dropdown with only 'msg')
+            var keyValue = $("#node-input-inputMsgField").val() || 'payload';
+            $("#node-input-typed-inputMsgField").typedInput({types:['msg']});
+            $("#node-input-typed-inputMsgField").typedInput('type','msg');
+            $("#node-input-typed-inputMsgField").typedInput('value',keyValue);
+            
+            // Show the outputMsgField value in a typedinput element (dropdown with only 'msg')
+            var keyValue = $("#node-input-outputMsgField").val() || 'payload';
+            $("#node-input-typed-outputMsgField").typedInput({types:['msg']});
+            $("#node-input-typed-outputMsgField").typedInput('type','msg');
+            $("#node-input-typed-outputMsgField").typedInput('value',keyValue);
+        },
+        oneditsave: function() {
+            // Copy the msgKeyField value from the typedinput element to the inputMsgField element
+            var keyValue = $("#node-input-typed-inputMsgField").typedInput('value');
+            $("#node-input-inputMsgField").val(keyValue);
+            
+            // Copy the msgKeyField value from the typedinput element to the outputMsgField element
+            var keyValue = $("#node-input-typed-outputMsgField").typedInput('value');
+            $("#node-input-outputMsgField").val(keyValue);
         }
     });
 </script>
 
 <script type="text/x-red" data-help-name="math">
     <p>A Node Red node to perform basic mathematical operations.</p>
-    <p>The <code>msg.payload</code> of the input message should contain the number(s), on which the selected operation will be executed.</p>
-    <p><ul>
-        <li>Average: average of all the numbers in the array</li>
-        <li>Maximum: get the number with the highest value from an array of numbers</li>
-        <li>Minimum: get the number with the lowest value from an array of numbers</li>
-        <li>Increment: add 1 to the number</li>
-        <li>Decrement: subtract 1 from the number</li>
-        <li>Integer part: truncate (trunc) the number to the integer part</li>
-        <li>Round upwards: round the number upwards (ceil) to the nearest integer</li>
-        <li>Round downwards: round the number downwards (floor) to the nearest integer</li>
-        <li>Nearest integer: rounds the number to the nearest integer</li>
-        <li>Sum: sum of the all the numbers in the array</li>
-        <li>Subtract: subtraction of the all the numbers in the array</li>
-        <li>Multiply: multiply all the numbers in the array</li>
-        <li>Divide: division of all the numbers in the array</li>
-        <li>Modulus: get the remainder of the division of the two numbers in the array</li>
-        <li>Absolute value: absolute value (abs) of the number</li>
-        <li>Random: a random number between 0 and 1</li>
-        <li>X to the power of y: x<sup>y</sup> (from an array of two numbers [x, y])</li>
-        <li>E to the power of x: value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183)</li>
-        <li>Cubic root: cubic root (x<sup>3</sup>) of the number</li>
-        <li>Natural logarithm (base E): natural logarithm (log) of the number</li>
-        <li>Arccosine: arccosine (acos) value of the number</li>
-        <li>Hyperbolic arccosine: hyperbolic arccosine (acosh) of the number</li>
-        <li>Arcsine: arcsine (asin) of the number in radians</li>
-        <li>Hyperbolic arcsine: hyperbolic arcsine (asinh) of the number</li>
-        <li>Arctangent: arctangent (atan) of the number, as a numeric value between -PI/2 and PI/2 radians</li>
-        <li>Hyperbolic arctangent: hyperbolic arctangent (atanh) of the number</li>
-        <li>Cosine: cosine (cos) of the number in radians</li>
-        <li>Hyperbolic cosine: hyperbolic cosine of the number</li>
-        <li>Sine: sine of the number in radians</li>
-        <li>Hyperbolic sine: hyperbolic sine (sinh) of the number</li>
-        <li>Square root: square root of the number</li>
-        <li>Tangent: tangent (tan) of an angle</li>
-        <li>Hyperbolic tangent: hyperbolic tangent (tanh) of the number</li>
-    </ul></p>
+    <p><strong>Input field:</strong><br/>
+    The name of the field in the input message, that contains the input number (or array of input numbers).</p>
+    <p><strong>Output field:</strong><br/>
+    The name of the field in the output message, where the result will be stored (as number or array of input numbers).</p>
+    <p><strong>Operation:</strong><br/>
+    A series of operations are available, that can be executed on the input data:
+    <ul>
+        <li>Average (avg): average of all the numbers in the array</li>
+        <li>Maximum (max): get the number with the highest value from an array of numbers</li>
+        <li>Minimum (min): get the number with the lowest value from an array of numbers</li>
+        <li>Increment (inc): add 1 to the number</li>
+        <li>Decrement (dec): subtract 1 from the number</li>
+        <li>Integer part (trunc): truncate the number to the integer part</li>
+        <li>Round upwards (ceil): round the number upwards to the nearest integer</li>
+        <li>Round downwards (floor): round the number downwards to the nearest integer</li>
+        <li>Nearest integer (round): rounds the number to the nearest integer</li>
+        <li>Round decimal places (rdec): round the number at a specified number of decimal places</li>
+        <li>Sum (sum): sum of the all the numbers in the array</li>
+        <li>Subtract (sub): subtraction of the all the numbers in the array</li>
+        <li>Multiply (mult): multiply all the numbers in the array</li>
+        <li>Divide (div): division of all the numbers in the array</li>
+        <li>Modulus (mod): get the remainder of the division of the two numbers in the array</li>
+        <li>Absolute value (abs): absolute value of the number</li>
+        <li>Random (rand): a random number between 0 and 1</li>
+        <li>X to the power of y (pow): x<sup>y</sup> (from an array of two numbers [x, y])</li>
+        <li>E to the power of x (exp): value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183)</li>
+        <li>Cubic root (cbrt): cubic root (x<sup>3</sup>) of the number</li>
+        <li>Natural logarithm (log): natural logarithm base E of the number</li>
+        <li>Arccosine (acos): arccosine value of the number</li>
+        <li>Hyperbolic arccosine (acosh): hyperbolic arccosine of the number</li>
+        <li>Arcsine (asin): arcsine of the number in radians</li>
+        <li>Hyperbolic arcsine (asinh: hyperbolic arcsine of the number</li>
+        <li>Arctangent (atan): arctangent of the number, as a numeric value between -PI/2 and PI/2 radians</li>
+        <li>Hyperbolic arctangent (atanh): hyperbolic arctangent of the number</li>
+        <li>Cosine (cos): cosine  of the number in radians</li>
+        <li>Hyperbolic cosine (cosh): hyperbolic cosine of the number</li>
+        <li>Sine (sin): sine of the number in radians</li>
+        <li>Hyperbolic sine (sinh): hyperbolic sine of the number</li>
+        <li>Square root (sqrt): square root of the number</li>
+        <li>Tangent (tan): tangent of an angle</li>
+        <li>Hyperbolic tangent (tanh): hyperbolic tangent of the number</li>
+    </ul>
+    Note that - when no operation is selected on the config screen - an operation needs to be specified in the <code>msg.operation</code> field.  The codes can be found between round brackets in the above list.</p>
     <p>When only a single number is needed for an operation, that number can be specified in the <code>msg.payload</code>.  However it is also possible to put (for such operations) an array of numbers in the <code>msg.payload</code>, in which case the same operation will be executed on all numbers in the array.  The result will also be an array then.</p>
 </script>
