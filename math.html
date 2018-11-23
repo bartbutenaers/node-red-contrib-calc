@@ -24,41 +24,7 @@
     <div class="form-row">
         <label for="node-input-operation"><i class="fa fa-calculator"></i> Operation</label>
         <select id="node-input-operation">
-            <option value=""></option>
-            <option value="avg">Average</option>
-            <option value="max">Maximum</option>
-            <option value="min">Minimum</option>            
-            <option value="inc">Increment</option>
-            <option value="dec">Decrement</option>
-            <option value="trunc">Integer part</option>
-            <option value="ceil">Round upwards</option>
-            <option value="floor">Round downwards</option>
-            <option value="round">Nearest integer</option>
-            <option value="rdec">Round decimal places</option>
-            <option value="sum">Sum</option>
-            <option value="sub">Subtract</option>
-            <option value="mult">Multiply</option>
-            <option value="div">Divide</option>
-            <option value="mod">Modulus (remainder)</option>
-            <option value="abs">Absolute value</option> 
-            <option value="rand">Random</option>
-            <option value="pow">X to the power of y)</option>
-            <option value="exp">E to power of x</option>
-            <option value="cbrt">Cubic root</option>
-            <option value="log">Natural logarithm (base E)</option>
-            <option value="acos">Arccosine</option>
-            <option value="acosh">Hyperbolic arccosine</option>
-            <option value="asin">Arcsine</option>
-            <option value="asinh">Hyperbolic arcsine</option>
-            <option value="atan">Arctangent</option>
-            <option value="atanh">Hyperbolic arctangent</option>
-            <option value="cos">Cosine</option>
-            <option value="cosh">Hyperbolic cosine</option>
-            <option value="sin">Sine</option>
-            <option value="sinh">Hyperbolic sine</option>
-            <option value="sqrt">Square root</option>
-            <option value="tan">Tangent</option>
-            <option value="tanh">Hyperbolic tangent</option>
+
         </select>
     </div>
     <br>
@@ -69,6 +35,44 @@
 </script>
 
 <script type="text/javascript">
+    var operations = [
+        {v:""      ,t:""},
+        {v:"avg"   ,t:"Average"},
+        {v:"max"   ,t:"Maximum"},
+        {v:"min"   ,t:"Minimum"},            
+        {v:"inc"   ,t:"Increment"},
+        {v:"dec"   ,t:"Decrement"},
+        {v:"trunc" ,t:"Integer part"},
+        {v:"ceil"  ,t:"Round upwards"},
+        {v:"floor" ,t:"Round downwards"},
+        {v:"round" ,t:"Nearest integer"},
+        {v:"rdec"  ,t:"Round decimal places"},
+        {v:"sum"   ,t:"Sum"},
+        {v:"sub"   ,t:"Subtract"},
+        {v:"mult"  ,t:"Multiply"},
+        {v:"div"   ,t:"Divide"},
+        {v:"mod"   ,t:"Modulus (remainder)"},
+        {v:"abs"   ,t:"Absolute value"}, 
+        {v:"rand"  ,t:"Random"},
+        {v:"pow"   ,t:"X to the power of y)"},
+        {v:"exp"   ,t:"E to power of x"},
+        {v:"cbrt"  ,t:"Cubic root"},
+        {v:"log"   ,t:"Natural logarithm (base E)"},
+        {v:"acos"  ,t:"Arccosine"},
+        {v:"acosh" ,t:"Hyperbolic arccosine"},
+        {v:"asin"  ,t:"Arcsine"},
+        {v:"asinh" ,t:"Hyperbolic arcsine"},
+        {v:"atan"  ,t:"Arctangent"},
+        {v:"atanh" ,t:"Hyperbolic arctangent"},
+        {v:"cos"   ,t:"Cosine"},
+        {v:"cosh"  ,t:"Hyperbolic cosine"},
+        {v:"sin"   ,t:"Sine"},
+        {v:"sinh"  ,t:"Hyperbolic sine"},
+        {v:"sqrt"  ,t:"Square root"},
+        {v:"tan"   ,t:"Tangent"},
+        {v:"tanh"  ,t:"Hyperbolic tangent"}
+    ];
+
     RED.nodes.registerType('math', {
         category: 'function',
         color:    '#fdd0a2',
@@ -82,11 +86,28 @@
         outputs: 1,
         icon: "calculator.png",
         label: function() {
+            var operationText = "";
+            
             // Get the text of the current operation stored in this node
-            var operationText = $("#node-input-operation option[value='" + this.operation + "']").text();
+            for (var i = 0; i < operations.length; i++) {
+                if (operations[i].v === this.operation) {
+                    operationText = operations[i].t;
+                    break;
+                }
+            }
+
             return this.name || operationText || "Mathematics";
         },
-        oneditprepare: function() { 
+        oneditprepare: function() {             
+            // Fill the dropdown with all available operations
+            for (var i = 0; i < operations.length; i++) {
+                var value = operations[i].v;
+                var text = operations[i].t;
+                $('#node-input-operation').append($("<option></option>").attr("value", value).text(text));
+            }
+            
+            $('#node-input-operation').val(this.operation);
+            
             // Show the inputMsgField value in a typedinput element (dropdown with only 'msg')
             var keyValue = $("#node-input-inputMsgField").val() || 'payload';
             $("#node-input-typed-inputMsgField").typedInput({types:['msg']});
