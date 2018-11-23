@@ -19,103 +19,107 @@ Three steps are involved to execute a mathematical calculation via this node:
 3. The result of the calculation will be stored in ```msg.payload``` of the output message.  The result can be a single output number or an array of output numbers.
 
 ## Operations
-+ ***Average***: average of all the numbers in the input array.
++ ***Average (avg)***: average of all the numbers in the input array.
 
    Input = ```[1, 2, 3, 4]```   => Output = ```2.5```
    
-+ ***Maximum***: get the number with the highest value from an array of numbers.
++ ***Maximum (max)***: get the number with the highest value from an array of numbers.
 
    Input = ```[1, 2, 3, 4]```   => Output = ```4```
    
-+ ***Minimum***: get the number with the lowest value from an array of numbers.
++ ***Minimum (min)***: get the number with the lowest value from an array of numbers.
 
    Input = ```[1, 2, 3, 4]```   => Output = ```1```
    
-+ ***Increment***: add 1 to the number.
++ ***Increment (inc)***: add 1 to the number.
 
    Input = ```4```   => Output = ```5```
    
    Input = ```[1, 2, 3, 4]```   => Output = ```[2, 3, 4, 5]```
    
-+ ***Decrement***: subtract 1 from the number.
++ ***Decrement (dec)***: subtract 1 from the number.
 
    Input = ```4```   => Output = ```3```
    
    Input = ```[1, 2, 3, 4]```   => Output = ```[0, 1, 2, 3]```
    
-+ ***Integer part***: truncate (trunc) the number to the integer part.
++ ***Integer part (trunc)***: truncate (trunc) the number to the integer part.
 
    Input = ```4.6```   => Output = ```4```
    
    Input = ```[1.3, 2.5, 3.7]```   => Output = ```[1, 2, 3]```
    
-+ ***Round upwards***: round the number upwards (ceil) to the nearest integer.
++ ***Round upwards (ceil)***: round the number upwards (ceil) to the nearest integer.
 
    Input = ```4.6```   => Output = ```5```
    
    Input = ```[1.3, 2.5, 3.7]```   => Output = ```[2, 3, 4]```
    
-+ ***Round downwards***: round the number downwards (floor) to the nearest integer.
++ ***Round downwards (floor)***: round the number downwards (floor) to the nearest integer.
 
    Input = ```4.6```   => Output = ```4```
    
    Input = ```[1.3, 2.5, 3.7]```   => Output = ```[1, 2, 3]```
    
-+ ***Nearest integer***: rounds the number to the nearest integer.
++ ***Nearest integer (round)***: rounds the number to the nearest integer.
 
    Input = ```4.6```   => Output = ```5```
    
    Input = ```[1.3, 2.5, 3.7]```   => Output = ```[1, 3, 4]```
    
-+ ***Sum***: sum of the all the numbers in the array.
++ ***Round decimal places (rdec)***: round the number at a specified number of decimal places (from an array of two numbers).
+
+   Input = ```[1.23456, 3]```   => Output = ```[1.234]```
+   
++ ***Sum (sum)***: sum of the all the numbers in the array.
 
    Input = ```[1, 2, 3, 4]```   => 1 + 2 + 3 + 4  => Output = ```10```
    
-+ ***Subtract***: subtraction of the all the numbers in the array.
++ ***Subtract (sub)***: subtraction of the all the numbers in the array.
 
    Input = ```[3, 2, 1]```   => 3 - 2 - 1 => Output = ```0```
    
-+ ***Multiply***: multiply all the numbers in the array.
++ ***Multiply (mult)***: multiply all the numbers in the array.
 
    Input = ```[3, 2, 1]```   => 3 * 2 * 1 => Output = ```6```
    
-+ ***Divide***: division of all the numbers in the array.
++ ***Divide (div)***: division of all the numbers in the array.
 
    Input = ```[3, 2, 1]```   => 3 : 2 : 1 => Output = ```1.5```
    
-+ ***Modulus***: get the remainder of the division of the *two* numbers in the array.
++ ***Modulus (mod)***: get the remainder of the division of the *two* numbers in the array.
 
    Input = ```[3, 2]```   => 3 % 2  => Output = ```1```
 
-+ ***Absolute value***: absolute value (abs) of the number.
++ ***Absolute value (abs)***: absolute value (abs) of the number.
 
    Input = ```-4```   => Output = ```4```
    
    Input = ```[-3, -5, -7]```   => Output = ```[3, 5, 7]```
    
-+ ***Random***: a random number between 0 and 1.  The input value will not be checked, since it is not required to calculate the output value.  When the input is an array of N length, then the output will also be an array containing N random numbers.
++ ***Random (rand)***: a random number between 0 and 1.  The input value will not be checked, since it is not required to calculate the output value.  When the input is an array of N length, then the output will also be an array containing N random numbers.
 
    Input = ```x```   => Output = ```0.xxxxx```
    
    Input = ```[x, x, x]```   => Output = ```[0.xxxxx, 0.xxxxx, 0.xxxxx]```
    
-+ ***X to the power of y***: x<sup>y</sup> from an array of two numbers.
++ ***X to the power of y (pow)***: x<sup>y</sup> from an array of two numbers.
 
    Input = ```[2, 3]```   => 2<sup>3</sup>  => Output = ```8```
    
-+ ***E to the power of x***: value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183).
-+ ***Cubic root***: cubic root (x<sup>3</sup>) of the number.
-+ ***Natural logarithm (base E)***: natural logarithm (log) of the number.
-+ ***Arccosine***: arccosine (acos) value of the number.
-+ ***Hyperbolic arccosine***: hyperbolic arccosine (acosh) of the number.
-+ ***Arcsine***: arcsine (asin) of the number in radians.
-+ ***Hyperbolic arcsine***: hyperbolic arcsine (asinh) of the number.
-+ ***Arctangent***: arctangent (atan) of the number, as a numeric value between -PI/2 and PI/2 radians.
-+ ***Hyperbolic arctangent***: hyperbolic arctangent (atanh) of the number.
-+ ***Cosine***: cosine (cos) of the number in radians.
-+ ***Hyperbolic cosine***: hyperbolic cosine of the number.
-+ ***Sine***: sine of the number in radians.
-+ ***Hyperbolic sine***: hyperbolic sine (sinh) of the number.
-+ ***Square root***: square root of the number.
-+ ***Tangent***: tangent (tan) of an angle.
-+ ***Hyperbolic tangent***: hyperbolic tangent (tanh) of the number.
++ ***E to the power of x (exp)***: value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183).
++ ***Cubic root (cbrt)***: cubic root (x<sup>3</sup>) of the number.
++ ***Natural logarithm (log)***: natural logarithm base E of the number.
++ ***Arccosine (acos)***: arccosine (acos) value of the number.
++ ***Hyperbolic arccosine (acosh)***: hyperbolic arccosine of the number.
++ ***Arcsine (asin)***: arcsine of the number in radians.
++ ***Hyperbolic arcsine (asinh)***: hyperbolic arcsine of the number.
++ ***Arctangent (atan)***: arctangent of the number, as a numeric value between -PI/2 and PI/2 radians.
++ ***Hyperbolic arctangent (atanh)***: hyperbolic arctangent of the number.
++ ***Cosine (cos)***: cosine of the number in radians.
++ ***Hyperbolic cosine (cosh)***: hyperbolic cosine of the number.
++ ***Sine (sin)***: sine of the number in radians.
++ ***Hyperbolic sine (sinh)***: hyperbolic sine of the number.
++ ***Square root (sqrt)***: square root of the number.
++ ***Tangent (tan)***: tangent of an angle.
++ ***Hyperbolic tangent (tanh)***: hyperbolic tangent of the number.
