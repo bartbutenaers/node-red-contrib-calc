@@ -11,12 +11,18 @@ For more advanced mathematical operations, please have a look at the [node-red-c
 
 ## Usage
 Three steps are involved to execute a mathematical calculation via this node:
-1. An input data is send to this node with a number or an array of numbers in the ```msg.payload```.  How many numbers should be available in the input message, depends on the *operation* type:
+1. An input data is send to this node with a number or an array of numbers in the input message.  By default the data will arrive via ```msg.payload```, but another input message field can be selected:  
+
+   ![Input field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-math/master/images/calc_input.png)
+
+   How many numbers should be available in the input message, depends on the *operation* type:
 + Most operations require only a ***single input number***.  For example a single input number ```-3``` is enough to calculate the absolute value.  All operations like this one will also accept an array of numbers as input data.  In that case *the same operation will be executed on every number in the array*!  For example the absolute value of array ```[-7, -3, -9, -12]``` will result in ```[7, 3, 9, 12]```.
 + Some other operations require always an ***array of input numbers***.  For example an array of minimum 2 input numbers ```[2, 3]``` is required to multiply, but the result will be a single output number ```6```.
 + A few operations require a ***fixed-length array of input numbers***.  For example X to the power of Y requires an array of two input numbers.
 2. The node will execute the requested operation on the input data.
-3. The result of the calculation will be stored in ```msg.payload``` of the output message.  The result can be a single output number or an array of output numbers.
+3. The result of the calculation will be stored in the output message.  The result can be a single output number or an array of output numbers.  By default the data will be put in ```msg.payload```, but another output message field can be selected: 
+
+   ![Output field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-math/master/images/calc_output.png)
 
 ## Operations
 Following operations are available:
@@ -124,3 +130,8 @@ Following operations are available:
 + **Square root (sqrt)**: square root of the number.
 + **Tangent (tan)**: tangent of an angle.
 + **Hyperbolic tangent (tanh)**: hyperbolic tangent of the number.
+
+## Message based operation
+When no operation is specified in the config screen, the operation needs to be specifiedin the ```msg.operation``` field of the input message.  In the above list of available operations, the operation code is specified between angle brackets.
+
+For example to calculate the 'Cubic root' of a number, the ```msg.operation``` field should contain value ```cbrt```.
