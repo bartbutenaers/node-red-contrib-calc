@@ -10,7 +10,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<script type="text/x-red" data-template-name="math">
+<script type="text/x-red" data-template-name="calc">
     <div class="form-row">
         <label for="node-input-typed-inputMsgField"><i class="fa fa-list"></i> Input field</label>
         <input id="node-input-typed-inputMsgField" type="text" style="width: 70%">
@@ -73,7 +73,7 @@
         {v:"tanh"  ,t:"Hyperbolic tangent"}
     ];
 
-    RED.nodes.registerType('math', {
+    RED.nodes.registerType('calc', {
         category: 'function',
         color:    '#fdd0a2',
         defaults: {
@@ -132,7 +132,7 @@
     });
 </script>
 
-<script type="text/x-red" data-help-name="math">
+<script type="text/x-red" data-help-name="calc">
     <p>A Node Red node to perform basic mathematical operations.</p>
     <p><strong>Input field:</strong><br/>
     The name of the field in the input message, that contains the input number (or array of input numbers).</p>
