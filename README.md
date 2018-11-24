@@ -1,10 +1,10 @@
-# node-red-contrib-math
-A Node-Red node to perform basic mathematical operations
+# node-red-contrib-calc
+A Node-Red node to perform basic mathematical calculations
 
 ## Install
 Run the following npm command in your Node-RED user directory (typically ~/.node-red):
 ```
-npm install node-red-contrib-math
+npm install node-red-contrib-calc
 ```
 
 For more advanced mathematical operations, please have a look at the [node-red-contrib-statistics](https://github.com/DeanCording/node-red-contrib-statistics) node.
@@ -13,7 +13,7 @@ For more advanced mathematical operations, please have a look at the [node-red-c
 Three steps are involved to execute a mathematical calculation via this node:
 1. An input data is send to this node with a number or an array of numbers in the input message.  By default the data will arrive via ```msg.payload```, but another input message field can be selected:  
 
-   ![Input field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-math/master/images/calc_input.png)
+   ![Input field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-calc/master/images/calc_input.png)
 
    How many numbers should be available in the input message, depends on the *operation* type:
    + Most operations require only a ***single input number***.  For example a single input number ```-3``` is enough to calculate the absolute value.  All operations like this one will also accept an array of numbers as input data.  In that case *the same operation will be executed on every number in the array*!  For example the absolute value of array ```[-7, -3, -9, -12]``` will result in ```[7, 3, 9, 12]```.
@@ -22,7 +22,7 @@ Three steps are involved to execute a mathematical calculation via this node:
 2. The node will execute the requested operation on the input data.
 3. The result of the calculation will be stored in the output message.  The result can be a single output number or an array of output numbers.  By default the data will be put in ```msg.payload```, but another output message field can be selected: 
 
-   ![Output field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-math/master/images/calc_output.png)
+   ![Output field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-calc/master/images/calc_output.png)
 
 ## Operations
 Following operations are available:
