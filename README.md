@@ -16,9 +16,9 @@ Three steps are involved to execute a mathematical calculation via this node:
    ![Input field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-math/master/images/calc_input.png)
 
    How many numbers should be available in the input message, depends on the *operation* type:
-+ Most operations require only a ***single input number***.  For example a single input number ```-3``` is enough to calculate the absolute value.  All operations like this one will also accept an array of numbers as input data.  In that case *the same operation will be executed on every number in the array*!  For example the absolute value of array ```[-7, -3, -9, -12]``` will result in ```[7, 3, 9, 12]```.
-+ Some other operations require always an ***array of input numbers***.  For example an array of minimum 2 input numbers ```[2, 3]``` is required to multiply, but the result will be a single output number ```6```.
-+ A few operations require a ***fixed-length array of input numbers***.  For example X to the power of Y requires an array of two input numbers.
+   + Most operations require only a ***single input number***.  For example a single input number ```-3``` is enough to calculate the absolute value.  All operations like this one will also accept an array of numbers as input data.  In that case *the same operation will be executed on every number in the array*!  For example the absolute value of array ```[-7, -3, -9, -12]``` will result in ```[7, 3, 9, 12]```.
+   + Some other operations require always an ***array of input numbers***.  For example an array of minimum 2 input numbers ```[2, 3]``` is required to multiply, but the result will be a single output number ```6```.
+    + A few operations require a ***fixed-length array of input numbers***.  For example X to the power of Y requires an array of two input numbers.
 2. The node will execute the requested operation on the input data.
 3. The result of the calculation will be stored in the output message.  The result can be a single output number or an array of output numbers.  By default the data will be put in ```msg.payload```, but another output message field can be selected: 
 
