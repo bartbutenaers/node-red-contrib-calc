@@ -15,7 +15,7 @@
  **/
 module.exports = function(RED) {
 
-	function MathNode(config) {
+	function CalcNode(config) {
 		RED.nodes.createNode(this, config);
         this.inputMsgField = config.inputMsgField;
         this.outputMsgField = config.outputMsgField;
@@ -391,5 +391,5 @@ module.exports = function(RED) {
         });
     }
   
-	RED.nodes.registerType("math", MathNode);
+	RED.nodes.registerType("calc", CalcNode);
 }
