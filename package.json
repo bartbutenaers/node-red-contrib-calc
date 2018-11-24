@@ -1,7 +1,7 @@
 {
-    "name": "node-red-contrib-math",
+    "name": "node-red-contrib-calc",
     "version": "1.0.0",
-    "description": "A Node-Red node to perform basic mathematical operations",
+    "description": "A Node-Red node to perform basic mathematical calculations",
     "dependencies": {
     },
     "author": {
@@ -10,12 +10,12 @@
     "license": "Apache-2.0",
     "keywords": ["node-red", "math", "mathematics", "calculate", "min", "max", "round", "trunc", "min", "max", "average"],
     "bugs": {
-        "url": "https://github.com/bartbutenaers/node-red-contrib-math/issues"
+        "url": "https://github.com/bartbutenaers/node-red-contrib-calc/issues"
     },
-    "homepage": "https://github.com/bartbutenaers/node-red-contrib-math",
+    "homepage": "https://github.com/bartbutenaers/node-red-contrib-calc",
     "repository": {
         "type": "git",
-        "url": "https://github.com/bartbutenaers/node-red-contrib-math.git"
+        "url": "https://github.com/bartbutenaers/node-red-contrib-calc.git"
     },
     "node-red": {
         "nodes": {
