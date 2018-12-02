@@ -15,7 +15,7 @@
  **/
 module.exports = function(RED) {
 
-	function CalcNode(config) {
+	function CalculatorNode(config) {
 	RED.nodes.createNode(this, config);
         this.inputMsgField = config.inputMsgField;
         this.outputMsgField = config.outputMsgField;
@@ -40,8 +40,8 @@ module.exports = function(RED) {
             return true;
         }
         
-        // Check whether all the values are numbers
-        function checkNumbers(inputValue, minCount, maxCount) {
+        // Check whether the input is correct
+        function checkInput(checkNumber, inputValue, minCount, maxCount) {
             var values = [];
             var numbers = [];      
             var isArray = Array.isArray(inputValue);
@@ -94,7 +94,7 @@ module.exports = function(RED) {
             
             for (var i = 0; i < values.length; i++) {
                 var number = parseFloat(values[i]);
-                if (isNaN(number)){
+                if (checkNumber && isNaN(number)){
                     node.error("The msg." + this.inputMsgField + " should only contain number(s)");
                     return null;
                 }
@@ -149,7 +149,7 @@ module.exports = function(RED) {
             
             switch(operation) {
                 case "abs":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.abs(a);
@@ -157,7 +157,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "acos":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.acos(a);
@@ -165,7 +165,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "acosh":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.acosh(a);
@@ -173,7 +173,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "asin":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.asin(a);
@@ -181,7 +181,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "asinh":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.asinh(a);
@@ -189,7 +189,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "atan":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.atan(a);
@@ -197,7 +197,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "atanh":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.atanh(a);
@@ -205,13 +205,13 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "avg":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     result = numbers.reduce(function(a, b) { return a + b; });
                     result = result / numbers.length;
                     break;
                 case "cbrt":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.cbrt(a);
@@ -219,7 +219,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "ceil":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.ceil(a);
@@ -227,7 +227,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "cos":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                      if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.cos(a);
@@ -235,7 +235,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "cosh":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.cosh(a);
@@ -243,7 +243,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "dec":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = a - 1;
@@ -251,7 +251,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "div":
-                    numbers = checkNumbers(msgKeyValue, 2);
+                    numbers = checkInput(true, msgKeyValue, 2);
                     if (!numbers) return;
                     
                     if (node.constant === 0) {
@@ -269,7 +269,7 @@ module.exports = function(RED) {
                     result = numbers.reduce(function(a, b) { return a / b; });
                     break;
                 case "exp":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                      if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.exp(a);
@@ -277,7 +277,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "inc":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = a + 1;
@@ -285,7 +285,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "floor":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.floor(a);
@@ -293,7 +293,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;
                 case "log":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.log(a);
@@ -301,27 +301,27 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;                
                 case "max":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     result = numbers.reduce(function(a, b) { return (a > b) ? a : b });
                     break;
                 case "min":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     result = numbers.reduce(function(a, b) { return (a > b) ? b : a });
                     break;
                 case "mult":
-                    numbers = checkNumbers(msgKeyValue, 2);
+                    numbers = checkInput(true, msgKeyValue, 2);
                     if (!numbers) return;
                     result = numbers.reduce(function(a, b) { return a * b; });
                     break;
                 case "mod":
-                    numbers = checkNumbers(msgKeyValue, 2, 2);
+                    numbers = checkInput(true, msgKeyValue, 2, 2);
                     if (!numbers) return;
                     result = numbers[0] % numbers[1];
                     break;
                 case "pow":
-                    numbers = checkNumbers(msgKeyValue, 2, 2);
+                    numbers = checkInput(true, msgKeyValue, 2, 2);
                     if (!numbers) return;
                     result = Math.pow(numbers[0], numbers[1]);
                     break;                
@@ -341,14 +341,47 @@ module.exports = function(RED) {
                     }
                     result = (isArray) ? numbers : numbers[0];
                     break;
+                case "randb":    
+                    numbers = checkInput(true, msgKeyValue, 2, 2);
+                    if (!numbers) return;
+                    result = Math.floor(Math.random() * (numbers[1] - numbers[0] + 1)) + numbers[0];
+                    break;
+                case "randa":    
+                    numbers = checkInput(true, msgKeyValue, 1);
+                    if (!numbers) return;
+                    result = numbers[Math.floor(Math.random() * numbers.length)];
+                    break;   
+                case "len":    
+                    numbers = checkInput(false, msgKeyValue, 1);
+                    if (!numbers) return;
+                    result = numbers.length;
+                    break;                    
+                // Implementation of sorting, since the sort node does not behave correctly at this moment.
+                // (see https://github.com/akashtalole/node-red-contrib-sort/issues/1)
+                case "sorta":    
+                    numbers = checkInput(true, msgKeyValue, 1);
+                    if (!numbers) return;
+                    numbers.sort(function(a, b) {
+                        return a - b;
+                    });
+                    result = numbers;
+                    break;                    
+                case "sortd":    
+                    numbers = checkInput(true, msgKeyValue, 1);
+                    if (!numbers) return;
+                    numbers.sort(function(a, b) {
+                        return b - a;
+                    });
+                    result = numbers;
+                    break; 
                 case "rdec":
-                    numbers = checkNumbers(msgKeyValue, 2, 2);
+                    numbers = checkInput(true, msgKeyValue, 2, 2);
                     if (!numbers) return;
                     // See http://www.jacklmoore.com/notes/rounding-in-javascript/
                     result = Number(Math.round(numbers[0] + 'e' + numbers[1]) + 'e-' + numbers[1]);
                     break;
                 case "round":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.round(a);
@@ -356,7 +389,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;  
                 case "sin":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.sin(a);
@@ -364,7 +397,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;  
                 case "sinh":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.sinh(a);
@@ -372,7 +405,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;  
                 case "sqrt":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.sqrt(a);
@@ -380,17 +413,17 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;  
                 case "sum":
-                    numbers = checkNumbers(msgKeyValue, 2);
+                    numbers = checkInput(true, msgKeyValue, 2);
                     if (!numbers) return;
                     result = numbers.reduce(function(a, b) { return a + b; });
                     break;
                 case "sub":
-                    numbers = checkNumbers(msgKeyValue, 2);
+                    numbers = checkInput(true, msgKeyValue, 2);
                     if (!numbers) return;
                     result = numbers.reduce(function(a, b) { return a - b; });
                     break;
                 case "tan":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.tan(a);
@@ -398,7 +431,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;  
                 case "tanh":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.tanh(a);
@@ -406,7 +439,7 @@ module.exports = function(RED) {
                     result = (isArray) ? numbers : numbers[0];
                     break;  
                 case "trunc":
-                    numbers = checkNumbers(msgKeyValue, 1);
+                    numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.trunc(a);
@@ -424,5 +457,5 @@ module.exports = function(RED) {
         });
     }
   
-	RED.nodes.registerType("calc", CalcNode);
+	RED.nodes.registerType("calculator", CalculatorNode);
 }
