@@ -110,6 +110,26 @@ Following operations are available:
    
    Input = ```[x, x, x]```   => Output = ```[0.xxxxx, 0.xxxxx, 0.xxxxx]```
    
++ **Random between min and max (randb)**: a random number between a minimum value and a maximum value, which both need to be specified in the input array.
+   
+   Input = ```[3, 8]```   => Output = ```3``` or ```4``` or ```5``` or ```6``` or ```7``` or ```8```
+
++ **Random from array (randa)**: a random number picked from an array of possible values.
+   
+   Input = ```[3, 5, 8]```   => Output = ```3``` or ```5``` or ```8```
+
++ **Length of array (len)**: the length of the input array.  The input values will not be checked, since it is not required that the array only contains numbers.
+   
+   Input = ```[7, "text", true, 8]```   => Output = ```4```
+
++ **Sort ascending (sorta)**: sort the input array (containing numbers) ascending, i.e. from low to high.
+   
+   Input = ```[9, 8, 7]```   => Output = ```[7, 8, 9]```
+
++ **Sort descending (sortd)**: sort the input array (containing numbers) descending, i.e. from high to low.
+   
+   Input = ```[7, 8, 9]```   => Output = ```[9, 8, 7]```
+   
 + **X to the power of y (pow)**: x<sup>y</sup> from an array of two numbers.
 
    Input = ```[2, 3]```   => 2<sup>3</sup>  => Output = ```8```
