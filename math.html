@@ -10,7 +10,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<script type="text/x-red" data-template-name="calc">
+<script type="text/x-red" data-template-name="calculator">
     <div class="form-row">
         <label for="node-input-typed-inputMsgField"><i class="fa fa-list"></i> Input field</label>
         <input id="node-input-typed-inputMsgField" type="text" style="width: 70%">
@@ -59,6 +59,11 @@
         {v:"mod"   ,t:"Modulus (remainder)"},
         {v:"abs"   ,t:"Absolute value"}, 
         {v:"rand"  ,t:"Random"},
+        {v:"randb" ,t:"Random between min and max"},
+        {v:"randa" ,t:"Random from array"},
+        {v:"len"   ,t:"Length of array"},
+        {v:"sorta" ,t:"Sort ascending"},
+        {v:"sortd" ,t:"Sort descending"},
         {v:"pow"   ,t:"X to the power of y"},
         {v:"exp"   ,t:"E to power of x"},
         {v:"cbrt"  ,t:"Cubic root"},
@@ -78,7 +83,7 @@
         {v:"tanh"  ,t:"Hyperbolic tangent"}
     ];
 
-    RED.nodes.registerType('calc', {
+    RED.nodes.registerType('calculator', {
         category: 'function',
         color:    '#fdd0a2',
         defaults: {
@@ -102,7 +107,7 @@
                 }
             }
 
-            return this.name || operationText || "Mathematics";
+            return this.name || operationText || "Calculator";
         },
         oneditprepare: function() {             
             // Fill the dropdown with all available operations
@@ -151,7 +156,7 @@
     });
 </script>
 
-<script type="text/x-red" data-help-name="calc">
+<script type="text/x-red" data-help-name="calculator">
     <p>A Node Red node to perform basic mathematical operations.</p>
     <p><strong>Input field:</strong><br/>
     The name of the field in the input message, that contains the input number (or array of input numbers).</p>
@@ -177,6 +182,11 @@
         <li>Modulus (mod): get the remainder of the division of the two numbers in the array</li>
         <li>Absolute value (abs): absolute value of the number</li>
         <li>Random (rand): a random number between 0 and 1</li>
+        <li>Random between min and max (randb): a random number between between the two numbers in the array)</li>
+        <li>Random from array (randa): a random number from an array of possible numbers</li>
+        <li>Length of array (len): the lenght of the array</li>
+        <li>Sort ascending (sorta): Sort the array ascending (i.e. from low to high)</li>
+        <li>Sort descending (sortd): Sort the array descending (i.e. from high to low)</li>
         <li>X to the power of y (pow): x<sup>y</sup> (from an array of two numbers [x, y])</li>
         <li>E to the power of x (exp): value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183)</li>
         <li>Cubic root (cbrt): cubic root (x<sup>3</sup>) of the number</li>
