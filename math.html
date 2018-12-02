@@ -158,6 +158,7 @@
 
 <script type="text/x-red" data-help-name="calculator">
     <p>A Node Red node to perform basic mathematical operations.</p>
+    <p>See <a target="_blank" href="https://github.com/bartbutenaers/node-red-contrib-calc">Github</a> for examples.</p>
     <p><strong>Input field:</strong><br/>
     The name of the field in the input message, that contains the input number (or array of input numbers).</p>
     <p><strong>Output field:</strong><br/>
@@ -207,4 +208,6 @@
     </ul>
     Note that - when no operation is selected on the config screen - an operation needs to be specified in the <code>msg.operation</code> field.  The codes can be found between round brackets in the above list.</p>
     <p>When only a single number is needed for an operation, that number can be specified in the <code>msg.payload</code>.  However it is also possible to put (for such operations) an array of numbers in the <code>msg.payload</code>, in which case the same operation will be executed on all numbers in the array.  The result will also be an array then.</p>
+    <p><strong>Constant field:</strong><br/>
+    In this field an optional number can be entered, to have a constant value in the calculation.  This constant value will automatically be added to the end of the input array.</p>
 </script>
