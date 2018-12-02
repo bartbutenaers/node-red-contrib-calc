@@ -155,3 +155,24 @@ Following operations are available:
 When no operation is specified in the config screen, the operation needs to be specifiedin the ```msg.operation``` field of the input message.  In the above list of available operations, the operation code is specified between angle brackets.
 
 For example to calculate the 'Cubic root' of a number, the ```msg.operation``` field should contain value ```cbrt```.
+
+## (Optional) constant values
+Almost all operations allow an optional constant to be used:
+
+   ![Constant field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-calc/master/images/calc_constant.png)
+   
+When a number is entered in this field, it *will automatically be added at the **end** of the input array*. When the input is a number, this node will convert it automatically to an array (containing both the number and the constant value).
+
+Some examples with constant value ```3```:
+
++ **Round constant number of decimal places**:
+
+   Input = ```1.23456```   =>   Internal = ```[1.23456, 3]```   =>   Output = ```[1.234]```
+
++ **X to a constant power**:
+
+   Input = ```2```   =>   Internal = ```[2, 3]```   =>   Output = ```8```
+   
++ **Sum (sum)**: sum of the all the numbers in the array.
+
+   Input = ```[7, 2, 5]```   =>   Internal = ```[7, 2, 5, 3]```   =>   Output = ```17```
