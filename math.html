@@ -27,6 +27,11 @@
 
         </select>
     </div>
+    <div class="form-row">
+        <label for="node-input-typed-constant"><i class="fa fa-hashtag"></i> Constant</label>
+        <input id="node-input-typed-constant" type="number" style="width: 70%">
+        <input id="node-input-constant" type="hidden">
+    </div>
     <br>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
@@ -80,7 +85,8 @@
             name: {value: ""},
             inputMsgField: {value:"payload", required:true},
             outputMsgField: {value:"payload", required:true},
-            operation: {value: ""}
+            operation: {value: ""},
+            constant: {value: null}
         },
         inputs: 1,
         outputs: 1,
@@ -109,25 +115,38 @@
             $('#node-input-operation').val(this.operation);
             
             // Show the inputMsgField value in a typedinput element (dropdown with only 'msg')
-            var keyValue = $("#node-input-inputMsgField").val() || 'payload';
+            var inputKeyValue = $("#node-input-inputMsgField").val() || 'payload';
             $("#node-input-typed-inputMsgField").typedInput({types:['msg']});
             $("#node-input-typed-inputMsgField").typedInput('type','msg');
-            $("#node-input-typed-inputMsgField").typedInput('value',keyValue);
+            $("#node-input-typed-inputMsgField").typedInput('value',inputKeyValue);
             
             // Show the outputMsgField value in a typedinput element (dropdown with only 'msg')
-            var keyValue = $("#node-input-outputMsgField").val() || 'payload';
+            var outputKeyValue = $("#node-input-outputMsgField").val() || 'payload';
             $("#node-input-typed-outputMsgField").typedInput({types:['msg']});
             $("#node-input-typed-outputMsgField").typedInput('type','msg');
-            $("#node-input-typed-outputMsgField").typedInput('value',keyValue);
+            $("#node-input-typed-outputMsgField").typedInput('value',outputKeyValue);
+
+            // Show the constant value in a typedinput element (dropdown with only 'number')
+            var constantValue = $("#node-input-constant").val();
+            $("#node-input-typed-constant").typedInput({types:['num']});
+            $("#node-input-typed-constant").typedInput('type','num');
+            $("#node-input-typed-constant").typedInput('value',constantValue);
         },
         oneditsave: function() {
-            // Copy the msgKeyField value from the typedinput element to the inputMsgField element
-            var keyValue = $("#node-input-typed-inputMsgField").typedInput('value');
-            $("#node-input-inputMsgField").val(keyValue);
+            // Copy the inputMsgField value from the typedinput element to the inputMsgField element
+            var inputKeyValue = $("#node-input-typed-inputMsgField").typedInput('value');
+            $("#node-input-inputMsgField").val(inputKeyValue);
             
-            // Copy the msgKeyField value from the typedinput element to the outputMsgField element
-            var keyValue = $("#node-input-typed-outputMsgField").typedInput('value');
-            $("#node-input-outputMsgField").val(keyValue);
+            // Copy the outputMsgField value from the typedinput element to the outputMsgField element
+            var outputKeyValue = $("#node-input-typed-outputMsgField").typedInput('value');
+            $("#node-input-outputMsgField").val(outputKeyValue);
+ 
+            // Copy the constantValue value from the typedinput element to the constantValue element
+            var constantValue = $("#node-input-typed-constant").typedInput('value');
+            if (constantValue) {
+                constantValue = parseInt(constantValue);
+            }
+            $("#node-input-constant").val(constantValue);
         }
     });
 </script>
@@ -165,7 +184,7 @@
         <li>Arccosine (acos): arccosine value of the number</li>
         <li>Hyperbolic arccosine (acosh): hyperbolic arccosine of the number</li>
         <li>Arcsine (asin): arcsine of the number in radians</li>
-        <li>Hyperbolic arcsine (asinh: hyperbolic arcsine of the number</li>
+        <li>Hyperbolic arcsine (asinh): hyperbolic arcsine of the number</li>
         <li>Arctangent (atan): arctangent of the number, as a numeric value between -PI/2 and PI/2 radians</li>
         <li>Hyperbolic arctangent (atanh): hyperbolic arctangent of the number</li>
         <li>Cosine (cos): cosine  of the number in radians</li>
