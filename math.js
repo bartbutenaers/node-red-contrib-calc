@@ -16,10 +16,11 @@
 module.exports = function(RED) {
 
 	function CalcNode(config) {
-		RED.nodes.createNode(this, config);
+	RED.nodes.createNode(this, config);
         this.inputMsgField = config.inputMsgField;
         this.outputMsgField = config.outputMsgField;
         this.operation = config.operation;
+        this.constant = config.constant;
     
         var node = this;
         
@@ -61,17 +62,32 @@ module.exports = function(RED) {
             
             if (maxCount && minCount === maxCount) {
                 if (values.length !== minCount) {
-                    node.error("The msg." + this.inputMsgField + " should be an array with " + minCount + " numbers");
+                    if (node.constant) {
+                        node.error("The msg." + this.inputMsgField + " should be an array with " + (--minCount) + " numbers (because constant value specified)");
+                    }
+                    else {
+                        node.error("The msg." + this.inputMsgField + " should be an array with " + minCount + " numbers");
+                    }
                     return null;
                 }
             }
             else {
                 if (values.length < minCount) {
-                    node.error("The msg." + this.inputMsgField + " should be an array with minimum " + minCount + " numbers");
+                    if (node.constant) {
+                        node.error("The msg." + this.inputMsgField + " should be an array with minimum " + (--minCount) + " numbers (because constant value specified)");
+                    }
+                    else {
+                        node.error("The msg." + this.inputMsgField + " should be an array with minimum " + minCount + " numbers");
+                    }
                     return null;
                 }
                 if (maxCount && values.length > maxCount) {
-                    node.error("The msg." + this.inputMsgField + " should be an array with maximum " + maxCount + " numbers");
+                    if (node.constant) {
+                        node.error("The msg." + this.inputMsgField + " should be an array with maximum " + (--maxCount) + " numbers (because constant value specified)");
+                    }
+                    else {
+                        node.error("The msg." + this.inputMsgField + " should be an array with maximum " + maxCount + " numbers");
+                    }
                     return null;
                 }
             }
@@ -108,8 +124,20 @@ module.exports = function(RED) {
                 return;
             }
             
+            // Check whether the input data is an arry.
+            // Remark: we won't take into account the constant value (below)
             var isArray = Array.isArray(msgKeyValue);
-            
+
+            // When a constant value is specified, this will be appended to the end of the array
+            if (node.constant) {
+                if (!isArray) {
+                    // To be able to append the constantValue (as second value), we need to convert the number to an array with one number
+                    msgKeyValue = [ msgKeyValue ];
+                }
+                
+                msgKeyValue.push(parseInt(node.constant));
+            }
+                        
             if (!operation || operation === "") {
                 operation = msg.operation;
                 
@@ -226,9 +254,14 @@ module.exports = function(RED) {
                     numbers = checkNumbers(msgKeyValue, 2);
                     if (!numbers) return;
                     
+                    if (node.constant === 0) {
+                        node.error("The constant value not be 0 (as denominator)");
+                        return null;
+                    }
+                    
                     for (var i = 1; i < numbers.length; i++) {
                         if (numbers[i] === 0) {
-                            node.error("The msg." + msgKeyValue + " should only contain non-zero number(s) for the denominators");
+                            node.error("The msg." + node.inputMsgField + " should only contain non-zero number(s) for the denominators");
                             return null;
                         }
                     }
