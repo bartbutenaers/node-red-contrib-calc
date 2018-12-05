@@ -38,7 +38,7 @@ Following operations are available:
 
    Input = ```[1, 2, 3, 4]```   => Output = ```1```
    
-+ ***Increment (inc)***: add 1 to the number.
++ **Increment (inc)**: add 1 to the number.
 
    Input = ```4```   => Output = ```5```
    
