@@ -129,6 +129,16 @@ Following operations are available:
 + **Sort descending (sortd)**: sort the input array (containing numbers) descending, i.e. from high to low.
    
    Input = ```[7, 8, 9]```   => Output = ```[9, 8, 7]```
+
++ **Create range (range)**: create an array of numbers, between the two numbers (minimum and maximum) in the array.
+   
+   Input = ```[2, 8]```   => Output = ```[2, 3, 4, 5, 6, 7, 8]```
+
+   Input = ```[2.1, 8.6]```   => Output = ```[2.1, 3.2, 4.2, 5.2, 6.2, 7.2, 8.2]```
+   
++ **Get distance (dist)**: get the distance between the numbers in the array, i.e. the range between the maximum and minimum number.
+
+   Input = ```[2, 9, 1, 8, 3]```   => Output = ```8```
    
 + **X to the power of y (pow)**: x<sup>y</sup> from an array of two numbers.
 
