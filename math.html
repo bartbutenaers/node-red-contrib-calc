@@ -64,6 +64,8 @@
         {v:"len"   ,t:"Length of array"},
         {v:"sorta" ,t:"Sort ascending"},
         {v:"sortd" ,t:"Sort descending"},
+        {v:"range" ,t:"Create range"},
+        {v:"dist"  ,t:"Get distance"},
         {v:"pow"   ,t:"X to the power of y"},
         {v:"exp"   ,t:"E to power of x"},
         {v:"cbrt"  ,t:"Cubic root"},
@@ -188,6 +190,8 @@
         <li>Length of array (len): the lenght of the array</li>
         <li>Sort ascending (sorta): Sort the array ascending (i.e. from low to high)</li>
         <li>Sort descending (sortd): Sort the array descending (i.e. from high to low)</li>
+        <li>Create range (range): Create an array of integer numbers, between the two numbers in the array</li>
+        <li>Get distance (dist): Get the distance (i.e. the range) between the numbers in the array</li>
         <li>X to the power of y (pow): x<sup>y</sup> (from an array of two numbers [x, y])</li>
         <li>E to the power of x (exp): value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183)</li>
         <li>Cubic root (cbrt): cubic root (x<sup>3</sup>) of the number</li>
@@ -208,6 +212,6 @@
     </ul>
     Note that - when no operation is selected on the config screen - an operation needs to be specified in the <code>msg.operation</code> field.  The codes can be found between round brackets in the above list.</p>
     <p>When only a single number is needed for an operation, that number can be specified in the <code>msg.payload</code>.  However it is also possible to put (for such operations) an array of numbers in the <code>msg.payload</code>, in which case the same operation will be executed on all numbers in the array.  The result will also be an array then.</p>
-    <p><strong>Constant field:</strong><br/>
+    <p><strong>Constant field:</strong><br/>	
     In this field an optional number can be entered, to have a constant value in the calculation.  This constant value will automatically be added to the end of the input array.</p>
 </script>
