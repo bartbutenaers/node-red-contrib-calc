@@ -374,6 +374,22 @@ module.exports = function(RED) {
                     });
                     result = numbers;
                     break; 
+                case "range":
+                    numbers = checkInput(true, msgKeyValue, 2, 2);
+                    if (!numbers) return;
+                    //numbers[0] = Math.trunc(numbers[0]);
+                    //numbers[1] = Math.trunc(numbers[1]);
+                    result = [];
+                    for (var k = numbers[0]; k <= numbers[1]; k++) {
+                        result.push(k);
+                    }
+                    break;
+                case "dist":
+                    numbers = checkInput(true, msgKeyValue, 2);
+                    if (!numbers) return;  
+                    numbers.sort();
+                    result = numbers[numbers.length - 1] - numbers[0];
+                    break;
                 case "rdec":
                     numbers = checkInput(true, msgKeyValue, 2, 2);
                     if (!numbers) return;
