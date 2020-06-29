@@ -28,8 +28,9 @@
         </select>
     </div>
     <div class="form-row">
+        <!-- Set step to 'any' to allow not only integers but also decimals -->
         <label for="node-input-typed-constant"><i class="fa fa-hashtag"></i> Constant</label>
-        <input id="node-input-typed-constant" type="number" style="width: 70%">
+        <input id="node-input-typed-constant" type="number" step="any" style="width: 70%">
         <input id="node-input-constant" type="hidden">
     </div>
     <div class="form-row">
@@ -167,7 +168,7 @@
             // Copy the constantValue value from the typedinput element to the constantValue element
             var constantValue = $("#node-input-typed-constant").typedInput('value');
             if (constantValue) {
-                constantValue = parseInt(constantValue);
+                constantValue = parseFloat(constantValue);
             }
             $("#node-input-constant").val(constantValue);
         }
