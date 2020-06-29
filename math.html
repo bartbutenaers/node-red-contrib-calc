@@ -32,6 +32,14 @@
         <input id="node-input-typed-constant" type="number" style="width: 70%">
         <input id="node-input-constant" type="hidden">
     </div>
+    <div class="form-row">
+        <label>&nbsp;</label>
+        <input type="checkbox" id="node-input-round" placeholder="" style="display:inline-block; width:auto; vertical-align:baseline;">
+        <label for="node-input-round">Round result to </label>
+        <input type="text" id="node-input-decimals" style="width:80px">
+        <span for="node-input-decimals" style="margin-left:5px;">decimals</span>
+    </div>
+    
     <br>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
@@ -93,7 +101,9 @@
             inputMsgField: {value:"payload", required:true},
             outputMsgField: {value:"payload", required:true},
             operation: {value: ""},
-            constant: {value: null}
+            constant: {value: null},
+            round: {value: false},
+            decimals: {value: 0}
         },
         inputs: 1,
         outputs: 1,
@@ -138,6 +148,12 @@
             $("#node-input-typed-constant").typedInput({types:['num']});
             $("#node-input-typed-constant").typedInput('type','num');
             $("#node-input-typed-constant").typedInput('value',constantValue);
+            
+            $('#node-input-round').change(function() {
+                $('#node-input-decimals').prop('disabled', !this.checked);
+                $('#node-input-decimals').val(0);
+            });
+            $('#node-input-round').change();
         },
         oneditsave: function() {
             // Copy the inputMsgField value from the typedinput element to the inputMsgField element
@@ -214,4 +230,6 @@
     <p>When only a single number is needed for an operation, that number can be specified in the <code>msg.payload</code>.  However it is also possible to put (for such operations) an array of numbers in the <code>msg.payload</code>, in which case the same operation will be executed on all numbers in the array.  The result will also be an array then.</p>
     <p><strong>Constant field:</strong><br/>	
     In this field an optional number can be entered, to have a constant value in the calculation.  This constant value will automatically be added to the end of the input array.</p>
+    <p><strong>Round result to ... decimals:</strong><br/>	
+    When selected, the output number(s) will be rounded to the specified number of decimals.</p>    
 </script>
