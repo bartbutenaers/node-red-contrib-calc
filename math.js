@@ -142,7 +142,7 @@ module.exports = function(RED) {
                     msgKeyValue = [ msgKeyValue ];
                 }
                 
-                msgKeyValue.push(parseInt(node.constant));
+                msgKeyValue.push(parseFloat(node.constant));
             }
                         
             if (!operation || operation === "") {
