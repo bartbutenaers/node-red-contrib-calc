@@ -10,7 +10,7 @@ npm install node-red-contrib-calc
 For more advanced mathematical operations, please have a look at the [node-red-contrib-statistics](https://github.com/DeanCording/node-red-contrib-statistics) node.
 
 ## Usage
-Three steps are involved to execute a mathematical calculation via this node:
+Four steps are involved to execute a mathematical calculation via this node:
 1. An input data is send to this node with a number or an array of numbers in the input message.  By default the data will arrive via ```msg.payload```, but another input message field can be selected:  
 
    ![Input field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-calc/master/images/calc_input.png)
@@ -20,7 +20,8 @@ Three steps are involved to execute a mathematical calculation via this node:
    + Some other operations require always an ***array of input numbers***.  For example an array of minimum 2 input numbers ```[2, 3]``` is required to multiply, but the result will be a single output number ```6```.
     + A few operations require a ***fixed-length array of input numbers***.  For example X to the power of Y requires an array of two input numbers.
 2. The node will execute the requested operation on the input data.
-3. The result of the calculation will be stored in the output message.  The result can be a single output number or an array of output numbers.  By default the data will be put in ```msg.payload```, but another output message field can be selected: 
+3. If required, the result of the calculation will be rounded to the specified number of decimals.
+4. The result of the calculation will be stored in the output message.  The result can be a single output number or an array of output numbers.  By default the data will be put in ```msg.payload```, but another output message field can be selected: 
 
    ![Output field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-calc/master/images/calc_output.png)
 
