@@ -17,10 +17,12 @@ module.exports = function(RED) {
 
 	function CalculatorNode(config) {
 	RED.nodes.createNode(this, config);
-        this.inputMsgField = config.inputMsgField;
+        this.inputMsgField  = config.inputMsgField;
         this.outputMsgField = config.outputMsgField;
-        this.operation = config.operation;
-        this.constant = config.constant;
+        this.operation      = config.operation;
+        this.constant       = config.constant;
+        this.round          = config.round;
+        this.decimals       = config.decimals;
     
         var node = this;
         
@@ -38,6 +40,11 @@ module.exports = function(RED) {
                 }
             }
             return true;
+        }
+        
+        // https://www.jacklmoore.com/notes/rounding-in-javascript/
+        function round(value, decimals) {
+            return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
         }
         
         // Check whether the input is correct
@@ -465,6 +472,18 @@ module.exports = function(RED) {
                 default:
                     node.error("The msg.operation contains an unsupported operation '" + operation + "'");
                     return null;
+            }
+            
+            // If required, round the result to the specified number of decimals
+            if (node.round) {
+                if (Array.isArray(result)) {
+                    for (var j = 0; j < result.length; j++) {
+                        result[j] = round(result[j], node.decimals);
+                    }
+                }
+                else {
+                    result = round(result, node.decimals);
+                }
             }
             
             RED.util.setMessageProperty(msg, node.outputMsgField, result, true);
