@@ -148,6 +148,7 @@ Following operations are available:
 + **E to the power of x (exp)**: value of E<sup>x</sup>, where E is Euler's number (approximately 2.7183).
 + **Cubic root (cbrt)**: cubic root (x<sup>3</sup>) of the number.
 + **Natural logarithm (log)**: natural logarithm base E of the number.
++ **Logarithm (log10)**: logarithm base 10 of the number.
 + **Arccosine (acos)**: arccosine (acos) value of the number.
 + **Hyperbolic arccosine (acosh)**: hyperbolic arccosine of the number.
 + **Arcsine (asin)**: arcsine of the number in radians.
