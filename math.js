@@ -306,7 +306,15 @@ module.exports = function(RED) {
                         numbers[index] = Math.log(a);
                     });
                     result = (isArray) ? numbers : numbers[0];
-                    break;                
+                    break;
+                case "log10":
+                    numbers = checkInput(true, msgKeyValue, 1);
+                    if (!numbers) return;
+                    numbers.forEach(function(a, index) {
+                        numbers[index] = Math.log10(a);
+                    });
+                    result = (isArray) ? numbers : numbers[0];
+                    break;      
                 case "max":
                     numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
