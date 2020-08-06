@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-calc",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A Node-Red node to perform basic mathematical calculations",
     "dependencies": {
     },
