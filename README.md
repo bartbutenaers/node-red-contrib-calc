@@ -9,6 +9,12 @@ npm install node-red-contrib-calc
 
 For more advanced mathematical operations, please have a look at the [node-red-contrib-statistics](https://github.com/DeanCording/node-red-contrib-statistics) node.
 
+## Support my Node-RED developments
+
+Please buy my wife a coffee to keep her happy, while I am busy developing Node-RED stuff for you ...
+
+<a href="https://www.buymeacoffee.com/bartbutenaers" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy my wife a coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
 ## Usage
 Four steps are involved to execute a mathematical calculation via this node:
 1. An input data is send to this node with a number or an array of numbers in the input message.  By default the data will arrive via ```msg.payload```, but another input message field can be selected:  
@@ -24,6 +30,15 @@ Four steps are involved to execute a mathematical calculation via this node:
 4. The result of the calculation will be stored in the output message.  The result can be a single output number or an array of output numbers.  By default the data will be put in ```msg.payload```, but another output message field can be selected: 
 
    ![Output field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-calc/master/images/calc_output.png)
+
+# Example flow
+
+The following flow shows how to search the maximum number from an array of injected numbers:
+
+![image](https://user-images.githubusercontent.com/14224149/90566608-110cde00-e1a9-11ea-9ce1-4f6964943fcb.png)
+```
+[{"id":"b6bc5399.8385e","type":"calculator","z":"4142483e.06fca8","name":"","inputMsgField":"payload","outputMsgField":"payload","operation":"max","constant":"","round":false,"decimals":0,"x":640,"y":3060,"wires":[["4c297cba.7585a4"]]},{"id":"e5a3b930.003428","type":"inject","z":"4142483e.06fca8","name":"","topic":"","payload":"[321,123,333,222,111]","payloadType":"json","repeat":"","crontab":"","once":false,"onceDelay":0.1,"showConfirmation":false,"confirmationLabel":"","x":420,"y":3060,"wires":[["b6bc5399.8385e"]]},{"id":"4c297cba.7585a4","type":"debug","z":"4142483e.06fca8","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"false","x":830,"y":3060,"wires":[]}]
+```
 
 ## Operations
 Following operations are available:
