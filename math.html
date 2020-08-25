@@ -153,7 +153,11 @@
             
             $('#node-input-round').change(function() {
                 $('#node-input-decimals').prop('disabled', !this.checked);
-                $('#node-input-decimals').val(0);
+                
+                // When rounding is disabled, the number of decimals should be reset to zero
+                if (!this.checked) {
+                    $('#node-input-decimals').val(0);
+                }
             });
             $('#node-input-round').change();
         },
