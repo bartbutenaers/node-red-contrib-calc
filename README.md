@@ -92,7 +92,7 @@ Following operations are available:
    
 + **Round decimal places (rdec)**: round the number at a specified number of decimal places (from an array of two numbers).
 
-   Input = ```[1.23456, 3]```   => Output = ```[1.234]```
+   Input = ```[1.23456, 3]```   => Output = ```[1.235]```
    
 + **Sum (sum)**: sum of the all the numbers in the array.
 
