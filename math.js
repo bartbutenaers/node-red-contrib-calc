@@ -22,6 +22,7 @@ module.exports = function(RED) {
         this.operation      = config.operation;
         this.constant       = config.constant;
         this.round          = config.round;
+        this.truncate       = config.truncate;
         this.decimals       = config.decimals;
     
         var node = this;
@@ -491,6 +492,18 @@ module.exports = function(RED) {
                 }
                 else {
                     result = round(result, node.decimals);
+                }
+            }
+
+            // If required, truncate the result
+            if (node.truncate) {
+                if (Array.isArray(result)) {
+                    for (var j = 0; j < result.length; j++) {
+                        result[j] = Math.trunc(result[j]);
+                    }
+                }
+                else {
+                    result = Math.trunc(result);
                 }
             }
             
