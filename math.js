@@ -419,7 +419,15 @@ module.exports = function(RED) {
                         numbers[index] = Math.round(a);
                     });
                     result = (isArray) ? numbers : numbers[0];
-                    break;  
+                    break;
+                case "trunc":
+                    numbers = checkInput(true, msgKeyValue, 1);
+                    if (!numbers) return;
+                    numbers.forEach(function(a, index) {
+                        numbers[index] = Math.trunc(a);
+                    });
+                    result = (isArray) ? numbers : numbers[0];
+                    break;
                 case "sin":
                     numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
