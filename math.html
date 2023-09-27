@@ -175,6 +175,7 @@
                 if (this.checked) {
                     // When the truncate option is checked, the round option should be unchecked.
                     $('#node-input-round').prop( "checked", false);
+                    $('#node-input-round').change();
                 }
             });
             $('#node-input-truncate').change();
