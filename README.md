@@ -26,7 +26,7 @@ Four steps are involved to execute a mathematical calculation via this node:
    + Some other operations require always an ***array of input numbers***.  For example an array of minimum 2 input numbers ```[2, 3]``` is required to multiply, but the result will be a single output number ```6```.
     + A few operations require a ***fixed-length array of input numbers***.  For example X to the power of Y requires an array of two input numbers.
 2. The node will execute the requested operation on the input data.
-3. If required, the result of the calculation will be rounded to the specified number of decimals.
+3. If required, the result of the calculation will be rounded to the specified number of decimals (or truncated).
 4. The result of the calculation will be stored in the output message.  The result can be a single output number or an array of output numbers.  By default the data will be put in ```msg.payload```, but another output message field can be selected: 
 
    ![Output field](https://raw.githubusercontent.com/bartbutenaers/node-red-contrib-calc/master/images/calc_output.png)
@@ -93,6 +93,12 @@ Following operations are available:
 + **Round decimal places (rdec)**: round the number at a specified number of decimal places (from an array of two numbers).
 
    Input = ```[1.23456, 3]```   => Output = ```[1.235]```
+
++ **Truncate (trunc)**: truncate the number.
+
+   Input = ```4.6```   => Output = ```4```
+   
+   Input = ```[1.3, 2.5, 3.7]```   => Output = ```[1, 2, 3]```
    
 + **Sum (sum)**: sum of the all the numbers in the array.
 
