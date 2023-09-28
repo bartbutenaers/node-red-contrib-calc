@@ -94,12 +94,6 @@ Following operations are available:
 
    Input = ```[1.23456, 3]```   => Output = ```[1.235]```
 
-+ **Truncate (trunc)**: truncate the number.
-
-   Input = ```4.6```   => Output = ```4```
-   
-   Input = ```[1.3, 2.5, 3.7]```   => Output = ```[1, 2, 3]```
-   
 + **Sum (sum)**: sum of the all the numbers in the array.
 
    Input = ```[1, 2, 3, 4]```   => 1 + 2 + 3 + 4  => Output = ```10```
@@ -107,7 +101,11 @@ Following operations are available:
 + **Subtract (sub)**: subtraction of the all the numbers in the array.
 
    Input = ```[3, 2, 1]```   => 3 - 2 - 1 => Output = ```0```
-   
+
++ **Truncate decimal places (tdec)**: truncate the number at a specified number of decimal places (from an array of two numbers).
+
+   Input = ```[1.56789, 3]```   => Output = ```[1.567]```
+
 + **Multiply (mult)**: multiply all the numbers in the array.
 
    Input = ```[3, 2, 1]```   => 3 * 2 * 1 => Output = ```6```
