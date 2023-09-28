@@ -43,7 +43,9 @@
     <div class="form-row">
         <label>&nbsp;</label>
         <input type="checkbox" id="node-input-truncate" placeholder="" style="display:inline-block; width:auto; vertical-align:baseline;">
-        <label for="node-input-round">Truncate result</label>
+        <label for="node-input-round" style="width:auto">Truncate result to </label>
+        <input type="text" id="node-input-decimals2" style="width:80px; margin-left:5px">
+        <span for="node-input-decimals2" style="margin-left:5px;">decimals</span>
     </div>
     <br>
     <div class="form-row">
@@ -60,12 +62,12 @@
         {v:"min"   ,t:"Minimum"},            
         {v:"inc"   ,t:"Increment"},
         {v:"dec"   ,t:"Decrement"},
-        {v:"trunc" ,t:"Integer part"},
+        {v:"trunc" ,t:"Integer part (truncate)"},
         {v:"ceil"  ,t:"Round upwards"},
         {v:"floor" ,t:"Round downwards"},
         {v:"round" ,t:"Nearest integer"},
         {v:"rdec"  ,t:"Round decimal places"},
-        {v:"trunc" ,t:"Truncate"},
+        {v:"tdec"  ,t:"Truncate decimal places"},
         {v:"sum"   ,t:"Sum"},
         {v:"sub"   ,t:"Subtract"},
         {v:"mult"  ,t:"Multiply"},
@@ -111,7 +113,8 @@
             constant: {value: null},
             round: {value: false},
             truncate: {value: false},
-            decimals: {value: 0}
+            decimals: {value: 0},
+            decimals2: {value: 0}
         },
         inputs: 1,
         outputs: 1,
@@ -163,6 +166,7 @@
                 if (this.checked) {
                     // When the round option is checked, the truncate option should be unchecked.
                     $('#node-input-truncate').prop( "checked", false);
+                    $('#node-input-truncate').change();
                 }
                 else {
                     // When rounding is disabled, the number of decimals should be reset to zero
@@ -172,10 +176,16 @@
             $('#node-input-round').change();
 
             $('#node-input-truncate').change(function() {
+                $('#node-input-decimals2').prop('disabled', !this.checked);
+
                 if (this.checked) {
                     // When the truncate option is checked, the round option should be unchecked.
                     $('#node-input-round').prop( "checked", false);
                     $('#node-input-round').change();
+                }
+                else {
+                    // When rounding is disabled, the number of decimals should be reset to zero
+                    $('#node-input-decimals2').val(0);
                 }
             });
             $('#node-input-truncate').change();
@@ -219,7 +229,7 @@
         <li>Round downwards (floor): round the number downwards to the nearest integer</li>
         <li>Nearest integer (round): rounds the number to the nearest integer</li>
         <li>Round decimal places (rdec): round the number at a specified number of decimal places</li>
-        <li>Truncate (trunc): truncate the number</li>
+        <li>Truncate decimal places (tdec): truncate the number at a specified number of decimal places</li>
         <li>Sum (sum): sum of the all the numbers in the array</li>
         <li>Subtract (sub): subtraction of the all the numbers in the array</li>
         <li>Multiply (mult): multiply all the numbers in the array</li>
