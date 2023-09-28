@@ -24,6 +24,7 @@ module.exports = function(RED) {
         this.round          = config.round;
         this.truncate       = config.truncate;
         this.decimals       = config.decimals;
+        this.decimals2      = config.decimals2;
     
         var node = this;
         
@@ -47,7 +48,12 @@ module.exports = function(RED) {
         function round(value, decimals) {
             return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
         }
-        
+
+        // https://stackoverflow.com/a/61428436
+        function truncate(value, decimals) {
+            return Math.trunc(value * Math.pow(10, decimals)) / Math.pow(10, decimals);
+        }
+
         // Check whether the input is correct
         function checkInput(checkNumber, inputValue, minCount, maxCount) {
             var values = [];
@@ -409,22 +415,13 @@ module.exports = function(RED) {
                 case "rdec":
                     numbers = checkInput(true, msgKeyValue, 2, 2);
                     if (!numbers) return;
-                    // See http://www.jacklmoore.com/notes/rounding-in-javascript/
-                    result = Number(Math.round(numbers[0] + 'e' + numbers[1]) + 'e-' + numbers[1]);
+                    result = round(numbers[0], numbers[1]);
                     break;
                 case "round":
                     numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
                     numbers.forEach(function(a, index) {
                         numbers[index] = Math.round(a);
-                    });
-                    result = (isArray) ? numbers : numbers[0];
-                    break;
-                case "trunc":
-                    numbers = checkInput(true, msgKeyValue, 1);
-                    if (!numbers) return;
-                    numbers.forEach(function(a, index) {
-                        numbers[index] = Math.trunc(a);
                     });
                     result = (isArray) ? numbers : numbers[0];
                     break;
@@ -477,7 +474,12 @@ module.exports = function(RED) {
                         numbers[index] = Math.tanh(a);
                     });
                     result = (isArray) ? numbers : numbers[0];
-                    break;  
+                    break;
+                case "tdec":
+                    numbers = checkInput(true, msgKeyValue, 2, 2);
+                    if (!numbers) return;
+                    result = truncate(numbers[0], numbers[1]);
+                    break;
                 case "trunc":
                     numbers = checkInput(true, msgKeyValue, 1);
                     if (!numbers) return;
@@ -507,11 +509,11 @@ module.exports = function(RED) {
             if (node.truncate) {
                 if (Array.isArray(result)) {
                     for (var j = 0; j < result.length; j++) {
-                        result[j] = Math.trunc(result[j]);
+                        result[j] = truncate(result[j], node.decimals2);
                     }
                 }
                 else {
-                    result = Math.trunc(result);
+                    result = truncate(result, node.decimals2);
                 }
             }
             
