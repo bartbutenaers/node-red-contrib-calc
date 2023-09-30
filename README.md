@@ -207,3 +207,11 @@ Some examples with constant value ```3```:
 + **Sum (sum)**: sum of the all the numbers in the array.
 
    Input = ```[7, 2, 5]```   =>   Internal = ```[7, 2, 5, 3]```   =>   Output = ```17```
+
+## Round result to ... decimals
+When selected, the output number(s) will be rounded to the specified number of decimals.  This rounding can be applied to the result of any selected operation.
+Note that the *"Round decimal places"* operation can be used instead, when it is only required to round the numeric values in the input message.
+
+## Truncate result to ... decimals:
+When selected, the output number(s) will be truncated to the specified number of decimals.  This truncating can be applied to the result of any selected operation.
+Note that the *"Truncate decimal places"* operation can be used instead, when it is only required to truncate the numeric values in the input message.
